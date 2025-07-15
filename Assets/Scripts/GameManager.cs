@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     private GameObject titleScreen;
     public Button playAgainButton;
+    private AudioSource backgroundMusic;
     private int score;
     public bool isGameActive = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         titleScreen = GameObject.Find("Title Screen");
+        backgroundMusic = GameObject.Find("Background Music").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -60,6 +62,10 @@ public class GameManager : MonoBehaviour
         spawnRate /= difficulty;
         isGameActive = true;
         score = 0;
+        if (!backgroundMusic.isPlaying)
+        {
+            backgroundMusic.Play();
+        }
         StartCoroutine(SpawnTarget());
         titleScreen.gameObject.SetActive(false);
     }

@@ -11,6 +11,8 @@ public class Target : MonoBehaviour
     private float xRange = 4;
     private float ySpawnPos = -2;
     public int pointValue;
+    private AudioSource bombClick;
+    private AudioSource fruitClick;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +23,8 @@ public class Target : MonoBehaviour
 
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
-
+        bombClick = GameObject.Find("Bomb Click").GetComponent<AudioSource>();
+        fruitClick = GameObject.Find("Fruit Click").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,12 +39,14 @@ public class Target : MonoBehaviour
         {
             if (gameObject.CompareTag("Bad"))
             {
+                bombClick.Play();
                 Destroy(gameObject);
                 instantiateParticle();
                 gameManager.GameOver();
             }
             else
             {
+                fruitClick.Play();
                 Destroy(gameObject);
                 instantiateParticle();
             }
