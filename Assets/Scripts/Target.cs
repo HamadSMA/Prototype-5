@@ -32,14 +32,29 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Destroy(gameObject);
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
-        gameManager.UpdateScore(pointValue);
+        if (gameManager.isGameActive)
+        {
+            if (gameObject.CompareTag("Bad"))
+            {
+                Destroy(gameObject);
+                instantiateParticle();
+                gameManager.GameOver();
+            }
+            else
+            {
+                Destroy(gameObject);
+                instantiateParticle();
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+        if (!gameObject.CompareTag("Bad"))
+        {
+            gameManager.GameOver();
+        }
     }
 
     Vector3 RandomForce()
@@ -55,4 +70,12 @@ public class Target : MonoBehaviour
     {
         return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
+
+    private void instantiateParticle()
+    {
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        gameManager.UpdateScore(pointValue);
+    }
+
+
 }
