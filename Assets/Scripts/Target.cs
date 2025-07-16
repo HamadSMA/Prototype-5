@@ -26,12 +26,7 @@ public class Target : MonoBehaviour
         bombClick = GameObject.Find("Bomb Click").GetComponent<AudioSource>();
         fruitClick = GameObject.Find("Fruit Click").GetComponent<AudioSource>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     private void OnMouseDown()
     {
@@ -41,14 +36,14 @@ public class Target : MonoBehaviour
             {
                 bombClick.Play();
                 Destroy(gameObject);
-                instantiateParticle();
+                InstantiateParticle();
                 gameManager.GameOver();
             }
             else
             {
                 fruitClick.Play();
                 Destroy(gameObject);
-                instantiateParticle();
+                InstantiateParticle();
             }
         }
     }
@@ -76,7 +71,7 @@ public class Target : MonoBehaviour
         return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
 
-    private void instantiateParticle()
+    private void InstantiateParticle()
     {
         Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
         gameManager.UpdateScore(pointValue);

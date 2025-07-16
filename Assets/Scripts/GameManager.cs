@@ -14,19 +14,15 @@ public class GameManager : MonoBehaviour
     public Button playAgainButton;
     private AudioSource backgroundMusic;
     private int score;
-    public bool isGameActive = false;
+    public bool isGameActive;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         titleScreen = GameObject.Find("Title Screen");
         backgroundMusic = GameObject.Find("Background Music").GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 
     IEnumerator SpawnTarget()
     {

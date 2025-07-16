@@ -12,12 +12,7 @@ public class DifficultyButton : MonoBehaviour
         button.onClick.AddListener(SetDifficulty);
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
     void SetDifficulty()
     {
         gameManager.StartGame(difficulty);
